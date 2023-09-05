@@ -4148,6 +4148,7 @@ function get_monster_zone_descriptions($monster_name) {
 		$is_ur = false;
 		$rejection = 0;
 		$copies = 1;
+		$special_info = "";
 		for ($i = 3; $i < count($monster_zone); $i++) {
 			$zone_data = $monster_zone[$i];
 			if ($zone_data == 'special') $is_special = true;
@@ -4160,6 +4161,9 @@ function get_monster_zone_descriptions($monster_name) {
 				$i += 1;
 				$copies = (int)$monster_zone[$i];
 			}
+			if ($zone_data == 'even' || $zone_data == 'odd') {
+				$special_info = $zone_data.' ascensions';
+			}
 		}
 		if ($is_ur) $res_entry = $monster_zone[0]." (ultra-rare)";
 		else if ($is_special) $res_entry = $monster_zone[0]." (special)";
@@ -4168,6 +4172,7 @@ function get_monster_zone_descriptions($monster_name) {
 			if ((int)$monster_zone[2] > 1) $res_entry .= ", ".$monster_zone[2]." monsters";
 			if ($copies > 1) $res_entry .= ", ".$copies." copies";
 			if ($rejection > 0) $res_entry .= ", ".$rejection."% rejection rate";
+			if ($special_info != "") $res_entry .= ", ".$special_info;
 			$res_entry .= ")";
 		}
 		$res[] = $res_entry;
