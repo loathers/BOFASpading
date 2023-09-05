@@ -2395,3 +2395,17 @@ $phylum_effects = [
 		"a feather (frozen / fetid / flirtatious / flaming / frightful)"
 	]
 ];
+
+function get_bofa_kill_effect($class_id, $path_id, $monster) {
+	global $phylum_effects, $regular_effects;
+	$seed = 421 * $class_id + 11 * $path_id + (int)$monster[0];
+	mt_srand($seed, MT_RAND_PHP);
+	$effect = null;
+	if ($seed % 3 == 1) {
+		$effect = $phylum_effects[$monster[2]][mt_rand(0, count($phylum_effects[$monster[2]]) - 1)];
+	}
+	else {
+		$effect = $regular_effects[mt_rand(0, count($regular_effects) - 1)];
+	}
+	return $effect;
+}

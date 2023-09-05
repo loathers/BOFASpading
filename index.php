@@ -66,15 +66,7 @@ if (!isset($_GET["path"])) $path_id = 0;
 $results = [];
 
 foreach ($monster_data as $monster) {
-	$seed = 421 * $class_id + 11 * $path_id + (int)$monster[0];
-	mt_srand($seed, MT_RAND_PHP);
-	$effect = null;
-	if ($seed % 3 == 1) {
-		$effect = $phylum_effects[$monster[2]][mt_rand(0, count($phylum_effects[$monster[2]]) - 1)];
-	}
-	else {
-		$effect = $regular_effects[mt_rand(0, count($regular_effects) - 1)];
-	}
+	$effect = get_bofa_kill_effect($class_id, $path_id, $monster);
 	if (!isset($results[$effect])) $results[$effect] = [];
 	$results[$effect][] = $monster[1];
 }
