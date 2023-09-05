@@ -5,13 +5,18 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<style>
 			body {
 				font-size: 0.8em;
 			}
-			p {
+			p, span {
 				margin: 0;
 				font-family: 'Open Sans', sans-serif;
+			}
+			p.monster span {
+				font-size: 0.8em;
+				color: #444444;
 			}
 			.hidden .spoiler {
 				display: none;
@@ -19,6 +24,9 @@
 			.spoiler {
 				display: grid;
 				grid-template-columns: repeat(3, 1fr);
+				grid-auto-rows: 1fr;
+				gap: 0.5em;
+				grid-gap: 0.5em;
 			}
 			.spoiler-inner {
 				display: flex;
@@ -113,7 +121,12 @@ foreach ($results as $result => $res_arr) {
 	echo "</div>";
 	echo "<div class='spoiler'>";
 	foreach ($res_arr as $res) {
-		echo "<p>".$res."</p>";
+		echo "<p class='monster'>".$res;
+		$monster_zone_descriptions = get_monster_zone_descriptions($res);
+		foreach ($monster_zone_descriptions as $desc) {
+			echo "<br><span>".$desc."</span>";
+		}
+		echo "</p>";
 	}
 	echo "</div></div>";
 	$block_id += 1;
