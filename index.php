@@ -55,7 +55,7 @@
 	<body>
 <?php
 
-require_once("/data/bofa_data.php");
+require_once("bofa_data.php");
 
 $class_id = (int)$_GET["class"];
 $path_id = (int)$_GET["path"];
