@@ -113,6 +113,7 @@ ksort($results);
 
 $block_id = 0;
 foreach ($results as $result => $res_arr) {
+	natcasesort($res_arr);
 	echo "<div class='spoiler-outer hidden' id='".$block_id."'>";
 	echo "<div class='spoiler-inner' onclick='toggleSpoiler(".$block_id.")'>";
 	echo "<p>".$result."</p>";
