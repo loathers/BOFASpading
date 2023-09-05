@@ -57,8 +57,8 @@
 
 require_once("bofa_data.php");
 
-$class_id = (int)$_GET["class"];
-$path_id = (int)$_GET["path"];
+if (isset($_GET["class"])) $class_id = (int)$_GET["class"];
+if (isset($_GET["path"])) $path_id = (int)$_GET["path"];
 
 if (!isset($_GET["class"])) $class_id = 1;
 if (!isset($_GET["path"])) $path_id = 0;
