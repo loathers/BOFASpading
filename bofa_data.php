@@ -2270,7 +2270,7 @@ $regular_effects = [
     "+25% item drop bonus",
     "It's a mystery (I Refuse!)",
     "Antiantifrozen (+3 <span style='color: red'>hot</span> resistance, 10 turns)",
-    "Shamed (+3 <span style='color: purple'>hot</span> resistance, 10 turns)",
+    "Shamed (+3 <span style='color: purple'>sleaze</span> resistance, 10 turns)",
     "Disabled Olfactory Processing (+3 <span style='color: green'>stench</span> resistance, 10 turns)",
     "Imagining Guts (+3 <span style='color: blue'>cold</span> resistance, 10 turns)",
     "Spooked (+3 <span style='color: gray'>spooky</span> resistance, 10 turns)",
