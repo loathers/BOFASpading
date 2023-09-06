@@ -3995,7 +3995,7 @@ $regular_effects = [
     "Restore MP (10%)",
     "+1 familiar experience",
     "+25% item drop bonus",
-    "It's a mystery (I Refuse!)",
+    "I Refuse!",
     "Antiantifrozen (+3 <span style='color: red'>hot</span> resistance, 10 turns)",
     "Shamed (+3 <span style='color: purple'>sleaze</span> resistance, 10 turns)",
     "Disabled Olfactory Processing (+3 <span style='color: green'>stench</span> resistance, 10 turns)",
@@ -4042,9 +4042,9 @@ $phylum_effects = [
 		"long pork"
 	],
 	"bug" => [
-		"Feeling Excited (15 turns)",
-		"Feeling Excited (15 turns)",
-		"Industrial Strength Starch (15 turns)",
+		"Feeling Excited (+25 all stats, 15 turns)",
+		"Feeling Excited (+25 all stats, 15 turns)",
+		"Industrial Strength Starch (+20 all stats, 15 turns)",
 		"filet of tangy gnat (\"fotelif\")"
 	],
 	"constellation" => [
@@ -4060,7 +4060,7 @@ $phylum_effects = [
 			"sprocket",
 			"clockwork key"
 		],
-		"Armor-Plated (20 turns)",
+		"Armor-Plated (+10 Damage Reduction, 20 turns)",
 		"Restore MP (20%)"
 	],
 	"demon" => [
@@ -4074,7 +4074,7 @@ $phylum_effects = [
 			"smart skull"
 		],
 		"gob of wet hair",
-		"Feeling Excited (15 turns)"
+		"Feeling Excited (+25 all stats, 15 turns)"
 	],
 	"elemental" => [
 		"cold powder",
@@ -4171,8 +4171,108 @@ $phylum_effects = [
 	]
 ];
 
+$refuse_items = ["big rock",
+"pretty flower",
+"ice-cold sir schlitz",
+"hermit permit",
+"worthless trinket",
+"worthless gewgaw",
+"worthless knick-knack",
+"ice-cold Willer",
+"rusty metal ring",
+"rusty metal shaft",
+"meat from yesterday",
+"spring",
+"sprocket",
+"cog",
+"empty meat tank",
+"ice-cold six-pack",
+"valuable trinket",
+"barbed-wire fence",
+"ghuol egg",
+"skeleton bone",
+"skewer",
+"lihc eye",
+"uncooked chorizo",
+"ice-cold fotie",
+"batgut",
+"briefcase",
+"fat stacks of cash",
+"loose teeth",
+"bat guano",
+"rat appendix",
+"hemp string",
+"gnoll teeth",
+"dead guy's watch",
+"ten-leaf clover",
+"white lightning",
+"mullet wig",
+"tenderizing hammer",
+"linoleum sword hilt",
+"linoleum stick",
+"linoleum crossbow string",
+"asbestos sword hilt",
+"asbestos stick",
+"asbestos crossbow string",
+"chrome sword hilt",
+"chrome stick",
+"chrome crossbow string",
+"yeti fur",
+"penguin skin",
+"yak skin",
+"hippopotamus skin",
+"pirate pelvis",
+"box",
+"bloody clown pants",
+"beer lens",
+"disease",
+"flaming crutch",
+"cast",
+"leather mask",
+"mesh cap",
+"enormous belt buckle",
+"catgut",
+"pr0n legs",
+"pine-fresh air freshener",
+"razor-sharp can lid",
+"Mad Train wine",
+"dirty hobo gloves",
+"furry pants",
+"disturbing fanfic",
+"fruitcake",
+"spiked femur",
+"filthy hippy poncho",
+"broken skull",
+"foon",
+"mob penguin cellular phone",
+"lead necklace",
+"pine tar",
+"tasket",
+"urinal cake",
+"blood flower",
+"lovecat tail",
+"plastic passion fruit",
+"picture of a dead guy's girlfriend",
+"length of string",
+"googly eye",
+"stuffing",
+"felt",
+"wooden block",
+"stench powder",
+"sleaze nuggets",
+"squashed frog",
+"alphabet gum",
+"old leather wallet",
+"old coin purse",
+"gob of wet hair",
+"rock",
+"stringy sinew",
+"stick",
+"tooth",
+"filthy poultice"];
+
 function get_bofa_kill_effect($class_id, $path_id, $monster) {
-	global $phylum_effects, $regular_effects;
+	global $phylum_effects, $regular_effects, $refuse_items;
 	$seed = 421 * $class_id + 11 * $path_id + (int)$monster[0];
 	mt_srand($seed, MT_RAND_PHP);
 	$effect = null;
@@ -4181,6 +4281,10 @@ function get_bofa_kill_effect($class_id, $path_id, $monster) {
 	}
 	else {
 		$effect = $regular_effects[mt_rand(0, count($regular_effects) - 1)];
+	}
+	if ($effect == "I Refuse!") {
+		mt_srand($seed + 11, MT_RAND_PHP);
+		$effect = $refuse_items[mt_rand(0, count($refuse_items) - 1)];
 	}
 	if (is_array($effect)) {
 		mt_srand($seed + 13, MT_RAND_PHP);
