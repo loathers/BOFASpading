@@ -5,13 +5,18 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<style>
 			body {
-				font-size: 0.8em;
+				font-size: 0.9em;
 			}
-			p {
+			p, span {
 				margin: 0;
 				font-family: 'Open Sans', sans-serif;
+			}
+			p.monster span {
+				font-size: 0.8em;
+				color: #444444;
 			}
 			.hidden .spoiler {
 				display: none;
@@ -19,6 +24,9 @@
 			.spoiler {
 				display: grid;
 				grid-template-columns: repeat(3, 1fr);
+				grid-auto-rows: 1fr;
+				gap: 0.5em;
+				grid-gap: 0.5em;
 			}
 			.spoiler-inner {
 				display: flex;
@@ -38,7 +46,6 @@
 			}
 			form {
 				display: flex;
-				justify-content: center;
 				align-items: center;
 			}
 			select {
@@ -57,8 +64,8 @@
 
 require_once("bofa_data.php");
 
-$class_id = (int)$_GET["class"];
-$path_id = (int)$_GET["path"];
+if (isset($_GET["class"])) $class_id = (int)$_GET["class"];
+if (isset($_GET["path"])) $path_id = (int)$_GET["path"];
 
 if (!isset($_GET["class"])) $class_id = 1;
 if (!isset($_GET["path"])) $path_id = 0;
@@ -66,15 +73,7 @@ if (!isset($_GET["path"])) $path_id = 0;
 $results = [];
 
 foreach ($monster_data as $monster) {
-	$seed = 421 * $class_id + 11 * $path_id + (int)$monster[0];
-	mt_srand($seed, MT_RAND_PHP);
-	$effect = null;
-	if ($seed % 3 == 1) {
-		$effect = $phylum_effects[$monster[2]][mt_rand(0, count($phylum_effects[$monster[2]]) - 1)];
-	}
-	else {
-		$effect = $regular_effects[mt_rand(0, count($regular_effects) - 1)];
-	}
+	$effect = get_bofa_kill_effect($class_id, $path_id, $monster);
 	if (!isset($results[$effect])) $results[$effect] = [];
 	$results[$effect][] = $monster[1];
 }
@@ -113,6 +112,7 @@ ksort($results);
 
 $block_id = 0;
 foreach ($results as $result => $res_arr) {
+	natcasesort($res_arr);
 	echo "<div class='spoiler-outer hidden' id='".$block_id."'>";
 	echo "<div class='spoiler-inner' onclick='toggleSpoiler(".$block_id.")'>";
 	echo "<p>".$result."</p>";
@@ -120,7 +120,12 @@ foreach ($results as $result => $res_arr) {
 	echo "</div>";
 	echo "<div class='spoiler'>";
 	foreach ($res_arr as $res) {
-		echo "<p>".$res."</p>";
+		echo "<p class='monster'>".$res;
+		$monster_zone_descriptions = get_monster_zone_descriptions($res);
+		foreach ($monster_zone_descriptions as $desc) {
+			echo "<br><span>".$desc."</span>";
+		}
+		echo "</p>";
 	}
 	echo "</div></div>";
 	$block_id += 1;
