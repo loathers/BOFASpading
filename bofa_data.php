@@ -4002,18 +4002,42 @@ $regular_effects = [
     "Imagining Guts (+3 <span style='color: blue'>cold</span> resistance, 10 turns)",
     "Spooked (+3 <span style='color: gray'>spooky</span> resistance, 10 turns)",
     "Ultrahydrated (5 turns)",
-    "worthless item",
+    [
+		"worthless trinket",
+		"worthless gewgaw",
+		"worthless knick-knack"
+	],
     "some Meat",
     "pocket wish (cap 3/day)",
     "fat stacks of cash",
-    "Sweet and Red / Green / Yellow",
-    "Gummi Heart / Brain / Skin",
-    "Ooh, Sweet! / Salty! / Bitter! / Sour! / Umami!",
+	[
+		"Sweet and Yellow (+30 ranged damage, +10 initiative, 10 turns) - every second time",
+		"Sweet and Green (+15 weapon damage, +15% weapon damage, 10 turns) - every second time",
+		"Sweet and Red (+10 spell damage, +10% spell damage, 10 turns) - every second time"
+	],
+    [
+		"Gummiheart (+100 Muscle, 10 turns) - every 4th time",
+		"Gummibrain (+100 Mysticality, 10 turns) - every 4th time",
+		"Gummiskin (+100 Moxie, 10 turns) - every 4th time"
+	],
+	[
+		"Ooh, Sweet! (+5 <span style='color: red'>hot</span> damage, 10 turns)",
+		"Ooh, Salty! (+5 <span style='color: blue'>cold</span> damage, 10 turns)",
+		"Ooh, Bitter! (+5 <span style='color: gray'>spooky</span> damage, 10 turns)",
+		"Ooh, Sour! (+5 <span style='color: green'>stench</span> damage, 10 turns)",
+		"Ooh, Umami! (+5 <span style='color: purple'>sleaze</span> damage, 10 turns)"
+	]
 ];
 
 $phylum_effects = [
 	"beast" => [
-		"Egg-stra Arm / Egg-cellent Vocabulary / Egg-stortionary Tactics / Eggs-tra Sensory Perception / Egg-headedness",
+		[
+			"Eggs-tra Sensory Perception (+10% item, 10 turns)",
+			"Egg-stortionary Tactics (+50% Meat, 10 turns)",
+			"Egg-stra Arm (+10% Muscle, 10 turns)",
+			"Egg-headedness (+10% Mysticality, 10 turns)",
+			"Egg-cellent Vocabulary (+10% Moxie, 10 turns)"
+		],
 		"displaced fish",
 		"long pork"
 	],
@@ -4029,7 +4053,13 @@ $phylum_effects = [
 		"3 lines"
 	],
 	"construct" => [
-		"a mechanical part (flange / cog / spring / clockwork key / sprocket)",
+		[
+			"spring",
+			"flange",
+			"cog",
+			"sprocket",
+			"clockwork key"
+		],
 		"Armor-Plated (20 turns)",
 		"Restore MP (20%)"
 	],
@@ -4038,7 +4068,11 @@ $phylum_effects = [
 		"hot powder"
 	],
 	"dude" => [
-		"a skull (broken or smart)",
+		[
+			"broken skull",
+			"broken skull",
+			"smart skull"
+		],
 		"gob of wet hair",
 		"Feeling Excited (15 turns)"
 	],
@@ -4054,7 +4088,11 @@ $phylum_effects = [
 	],
 	"fish" => [
 		"Fishy (10 turns)",
-		"fish meat (slick / glistening / beefy)",
+		[
+			"beefy fish meat",
+			"glistening fish meat",
+			"slick fish meat"
+		],
 		"3 dull fish scales"
 	],
 	"goblin" => [
@@ -4083,7 +4121,11 @@ $phylum_effects = [
 	],
 	"mer-kin" => [
 		"+Mysticality substats",
-		"fish meat (slick / glistening / beefy)",
+		[
+			"beefy fish meat",
+			"glistening fish meat",
+			"slick fish meat"
+		],
 		"seaweed"
 	],
 	"orc" => [
@@ -4119,7 +4161,13 @@ $phylum_effects = [
 	"weird" => [
 		"+Mysticality substats",
 		"Restore MP (25%)",
-		"a feather (frozen / fetid / flirtatious / flaming / frightful)"
+		[
+			"flaming feather",
+			"frozen feather",
+			"frightful feather",
+			"fetid feather",
+			"flirtatious feather"
+		]
 	]
 ];
 
@@ -4133,6 +4181,10 @@ function get_bofa_kill_effect($class_id, $path_id, $monster) {
 	}
 	else {
 		$effect = $regular_effects[mt_rand(0, count($regular_effects) - 1)];
+	}
+	if (is_array($effect)) {
+		mt_srand($seed + 13, MT_RAND_PHP);
+		$effect = $effect[mt_rand(0, count($effect) - 1)];
 	}
 	return $effect;
 }
