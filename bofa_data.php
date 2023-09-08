@@ -1,6 +1,7 @@
 <?php
 
 $monster_data = [
+// Mafia negative ID monsters do not actually have negative IDs, they are used to differentiate between different types of the same monster. Hence, displaying them is misleading.
 ["1", "spooky vampire (Spooky Forest)", "undead"],
 ["3", "dodecapede", "bug"],
 ["5", "apathetic lizardman", "humanoid"],
