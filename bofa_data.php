@@ -4048,8 +4048,9 @@ $phylum_effects = [
 		"filet of tangy gnat (\"fotelif\")"
 	],
 	"constellation" => [
-		"3 stars",
+		"star",
 		"alien drugs",
+		"3 stars",
 		"3 lines"
 	],
 	"construct" => [
