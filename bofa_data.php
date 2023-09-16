@@ -4258,12 +4258,25 @@ function get_bofa_kill_effect($class_id, $path_id, $monster) {
 	$seed = 421 * $class_id + 11 * $path_id + (int)$monster[0];
 	mt_srand($seed, MT_RAND_PHP);
 	$effect = null;
-	if ($seed % 3 == 1) {
+	$is_phylum_specific = false;
+	if ($path_id == 49 && $monster[2] == "bug") { // path interaction woohoo
+		if ($seed % 2 == 1) {
+			$is_phylum_specific = true;
+		}
+	}
+	else {
+		if ($seed % 3 == 1) {
+			$is_phylum_specific = true;
+		}
+	}
+
+	if ($is_phylum_specific) {
 		$effect = $phylum_effects[$monster[2]][mt_rand(0, count($phylum_effects[$monster[2]]) - 1)];
 	}
 	else {
 		$effect = $regular_effects[mt_rand(0, count($regular_effects) - 1)];
 	}
+	
 	if ($effect == "I Refuse!") {
 		mt_srand($seed + 11, MT_RAND_PHP);
 		$effect = $refuse_items[mt_rand(0, count($refuse_items) - 1)];
