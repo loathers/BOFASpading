@@ -4083,7 +4083,15 @@ $phylum_effects = [
 		"Cobb's Knob Wurstbrau"
 	],
 	"hippy" => [
-		"a fruit",
+		[
+			"orange",
+			"grapes",
+			"tomato",
+			"strawberry",
+			"grapefruit",
+			"olive",
+			"lemon"
+		],
 		"stench powder",
 		"pretty flower"
 	],
