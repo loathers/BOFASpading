@@ -3988,7 +3988,7 @@ $regular_effects = [
 		"worthless gewgaw",
 		"worthless knick-knack"
 	],
-    "some Meat",
+    "some Meat@base Meat drop",
     "pocket wish (cap 3/day)",
     "fat stacks of cash",
 	[
@@ -4083,7 +4083,15 @@ $phylum_effects = [
 		"Cobb's Knob Wurstbrau"
 	],
 	"hippy" => [
-		"a fruit",
+		[
+			"orange",
+			"grapes",
+			"tomato",
+			"strawberry",
+			"grapefruit",
+			"olive",
+			"lemon"
+		],
 		"stench powder",
 		"pretty flower"
 	],
@@ -4118,7 +4126,7 @@ $phylum_effects = [
 	"penguin" => [
 		"magical ice cubes",
 		"+Muscle substats",
-		"some Meat"
+		"some Meat (penguins)"
 	],
 	"pirate" => [
 		"bottle of rum",
@@ -4284,6 +4292,11 @@ function get_bofa_kill_effect($class_id, $path_id, $monster) {
 	if (is_array($effect)) {
 		mt_srand($seed + 13, MT_RAND_PHP);
 		$effect = $effect[mt_rand(0, count($effect) - 1)];
+	}
+	if ($effect == "some Meat (penguins)") {
+		mt_srand($seed + 12, MT_RAND_PHP);
+		// The part after @ is considered to be a comment when processed for display
+		$effect = "some Meat@".(mt_rand(0, 50) + 100)." Meat";
 	}
 	return $effect;
 }
