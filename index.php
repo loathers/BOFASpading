@@ -14,7 +14,11 @@
 				margin: 0;
 				font-family: 'Open Sans', sans-serif;
 			}
-			p.monster span {
+			p.monster span.comment {
+				font-size: 0.9em;
+				color: #222288;
+			}
+			p.monster span.zone {
 				font-size: 0.8em;
 				color: #444444;
 			}
@@ -74,8 +78,14 @@ $results = [];
 
 foreach ($monster_data as $monster) {
 	$effect = get_bofa_kill_effect($class_id, $path_id, $monster);
-	if (!isset($results[$effect])) $results[$effect] = [];
-	$results[$effect][] = $monster[1];
+	$effect_name = $effect;
+	$effect_comment = "";
+	if (strpos($effect, "@") !== false) {
+		$effect_name = substr($effect, 0, strpos($effect, "@"));
+		$effect_comment = substr($effect, strpos($effect, "@") + 1);
+	}
+	if (!isset($results[$effect_name])) $results[$effect_name] = [];
+	$results[$effect_name][] = Array("monster" => $monster[1], "comment" => $effect_comment);
 }
 
 ksort($results);
@@ -120,10 +130,11 @@ foreach ($results as $result => $res_arr) {
 	echo "</div>";
 	echo "<div class='spoiler'>";
 	foreach ($res_arr as $res) {
-		echo "<p class='monster'>".$res;
-		$monster_zone_descriptions = get_monster_zone_descriptions($res);
+		echo "<p class='monster'>".$res["monster"];
+		if ($res["comment"] != "") echo "<br><span class='comment'>".$res["comment"]."</span>";
+		$monster_zone_descriptions = get_monster_zone_descriptions($res["monster"]);
 		foreach ($monster_zone_descriptions as $desc) {
-			echo "<br><span>".$desc."</span>";
+			echo "<br><span class='zone'>".$desc."</span>";
 		}
 		echo "</p>";
 	}
