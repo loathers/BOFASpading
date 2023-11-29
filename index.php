@@ -122,7 +122,9 @@ ksort($results);
 
 $block_id = 0;
 foreach ($results as $result => $res_arr) {
-	natcasesort($res_arr);
+	usort($res_arr, function($a, $b) {
+		return strnatcasecmp($a["monster"], $b["monster"]);
+	});
 	echo "<div class='spoiler-outer hidden' id='".$block_id."'>";
 	echo "<div class='spoiler-inner' onclick='toggleSpoiler(".$block_id.")'>";
 	echo "<p>".$result."</p>";
