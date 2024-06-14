@@ -3965,7 +3965,7 @@ $paths = [
 	["Fall of the Dinosaurs", "46"],
 	["Avatar of Shadows Over Loathing", "47"],
 	["Legacy of Loathing", "48"],
-	["A Shrunken Adventurer Am I", "49"].
+	["A Shrunken Adventurer Am I", "49"],
 	["WereProfessor", "50"],
 	["11 Things I Hate About U", "51"]
 ];
