@@ -3967,7 +3967,8 @@ $paths = [
 	["Legacy of Loathing", "48"],
 	["A Shrunken Adventurer Am I", "49"],
 	["WereProfessor", "50"],
-	["11 Things I Hate About U", "51"]
+	["11 Things I Hate About U", "51"],
+	["Avant Guard", "52"]
 ];
 
 $regular_effects = [

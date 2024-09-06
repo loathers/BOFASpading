@@ -61,6 +61,11 @@
 			function toggleSpoiler(spoiler_id) {
 				document.getElementById(spoiler_id).classList.toggle('hidden');
 			}
+			function openAllSpoilers() {
+				for (let element of document.getElementsByClassName('spoiler-outer')) {
+					element.classList.remove('hidden');
+				}
+			}
 		</script>
 	</head>
 	<body>
@@ -117,7 +122,7 @@ ksort($results);
 
     <button type="submit">Update</button>
 </form>
-
+<button onclick="openAllSpoilers()">Open all</button>
 <?php
 
 $block_id = 0;
