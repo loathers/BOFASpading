@@ -8,28 +8,33 @@ export async function load() {
       nodes: {
         id: true,
         name: true,
-      }
+      },
     },
     allPaths: {
       nodes: {
         id: true,
         name: true,
-      }
+      },
     },
     allMonsters: {
       nodes: {
         id: true,
         name: true,
         phylum: true,
-      }
-    }
+      },
+    },
   });
 
   return {
-    classes: (data.allClasses?.nodes || []).filter(m => m !== null),
-    paths: (data.allPaths?.nodes || []).filter(m => m !== null),
-    monsters: (data.allMonsters?.nodes || []).filter(m => m !== null).map(m => ({ ...m, phylum: m.phylum === "undefined" ? undefined : m.phylum })),
-  }
+    classes: (data.allClasses?.nodes || []).filter((m) => m !== null),
+    paths: (data.allPaths?.nodes || []).filter((m) => m !== null),
+    monsters: (data.allMonsters?.nodes || [])
+      .filter((m) => m !== null)
+      .map((m) => ({
+        ...m,
+        phylum: m.phylum === "undefined" ? undefined : m.phylum,
+      })),
+  };
 }
 
 type LoadResult = Awaited<ReturnType<typeof load>>;

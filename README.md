@@ -5,21 +5,25 @@ A TypeScript-based web application for tracking Book of Facts effects in Kingdom
 ## Setup
 
 1. Install dependencies:
+
 ```bash
 npm install
 ```
 
 2. Build the TypeScript code:
+
 ```bash
 npm run build
 ```
 
 3. Start the server:
+
 ```bash
 npm start
 ```
 
 For development with auto-reload:
+
 ```bash
 npm run dev
 ```

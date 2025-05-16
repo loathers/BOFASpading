@@ -16,53 +16,23 @@
     "Industrial Strength Starch (+20 all stats, 15 turns)",
     "filet of tangy gnat (\"fotelif\")"
   ],
-  "constellation": [
-    "star",
-    "alien drugs",
-    "3 stars",
-    "3 lines"
-  ],
+  "constellation": ["star", "alien drugs", "3 stars", "3 lines"],
   "construct": [
-    [
-      "spring",
-      "flange",
-      "cog",
-      "sprocket",
-      "clockwork key"
-    ],
+    ["spring", "flange", "cog", "sprocket", "clockwork key"],
     "Armor-Plated (+10 Damage Reduction, 20 turns)",
     "Restore MP (20%)"
   ],
-  "demon": [
-    "fire",
-    "hot powder"
-  ],
+  "demon": ["fire", "hot powder"],
   "dude": [
-    [
-      "broken skull",
-      "broken skull",
-      "smart skull"
-    ],
+    ["broken skull", "broken skull", "smart skull"],
     "gob of wet hair",
     "Feeling Excited (+25 all stats, 15 turns)"
   ],
-  "elemental": [
-    "cold powder",
-    "twinkly nuggets",
-    "+all substats"
-  ],
-  "elf": [
-    "candy cane",
-    "+Moxie substats",
-    "bottle of whiskey"
-  ],
+  "elemental": ["cold powder", "twinkly nuggets", "+all substats"],
+  "elf": ["candy cane", "+Moxie substats", "bottle of whiskey"],
   "fish": [
     "Fishy (10 turns)",
-    [
-      "beefy fish meat",
-      "glistening fish meat",
-      "slick fish meat"
-    ],
+    ["beefy fish meat", "glistening fish meat", "slick fish meat"],
     "3 dull fish scales"
   ],
   "goblin": [
@@ -83,27 +53,16 @@
     "stench powder",
     "pretty flower"
   ],
-  "hobo": [
-    "bottle of vodka",
-    "hobo nickel",
-    "+Moxie substats"
-  ],
+  "hobo": ["bottle of vodka", "hobo nickel", "+Moxie substats"],
   "horror": [
     "thin black candle",
     "Restore HP (20%)",
     "scroll of ancient forbidden unspeakable evil"
   ],
-  "humanoid": [
-    "+Muscle substats",
-    "fine wine"
-  ],
+  "humanoid": ["+Muscle substats", "fine wine"],
   "mer-kin": [
     "+Mysticality substats",
-    [
-      "beefy fish meat",
-      "glistening fish meat",
-      "slick fish meat"
-    ],
+    ["beefy fish meat", "glistening fish meat", "slick fish meat"],
     "seaweed"
   ],
   "orc": [
@@ -111,31 +70,11 @@
     "tattered scrap of paper (cap 11/day)",
     "bottle of tequila"
   ],
-  "penguin": [
-    "magical ice cubes",
-    "+Muscle substats",
-    "some Meat (penguins)"
-  ],
-  "pirate": [
-    "bottle of rum",
-    "+Moxie substats",
-    "eyepatch"
-  ],
-  "plant": [
-    "cherry",
-    "Restore HP (50%)",
-    "+all substats"
-  ],
-  "slime": [
-    "+all substats",
-    "+Moxie substats",
-    "Slimed (20)"
-  ],
-  "undead": [
-    "skeleton bone",
-    "spooky powder",
-    "+Mysticality substats"
-  ],
+  "penguin": ["magical ice cubes", "+Muscle substats", "some Meat (penguins)"],
+  "pirate": ["bottle of rum", "+Moxie substats", "eyepatch"],
+  "plant": ["cherry", "Restore HP (50%)", "+all substats"],
+  "slime": ["+all substats", "+Moxie substats", "Slimed (20)"],
+  "undead": ["skeleton bone", "spooky powder", "+Mysticality substats"],
   "weird": [
     "+Mysticality substats",
     "Restore MP (25%)",

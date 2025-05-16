@@ -13,11 +13,7 @@
   "Imagining Guts (+3 cold resistance, 10 turns)",
   "Spooked (+3 spooky resistance, 10 turns)",
   "Ultrahydrated (5 turns)",
-  [
-    "worthless trinket",
-    "worthless gewgaw",
-    "worthless knick-knack"
-  ],
+  ["worthless trinket", "worthless gewgaw", "worthless knick-knack"],
   "some Meat@base Meat drop",
   "pocket wish (cap 3/day)",
   "fat stacks of cash",

@@ -447,6 +447,7 @@ __metadata:
     ejs: "npm:^3.1.9"
     express: "npm:^4.18.2"
     kol-rng: "npm:^1.0.0"
+    prettier: "npm:^3.5.3"
     tsx: "npm:^4.19.4"
     typescript: "npm:^5.3.3"
   languageName: unknown
@@ -1557,6 +1558,15 @@ __metadata:
   version: 4.0.2
   resolution: "picomatch@npm:4.0.2"
   checksum: 10c0/7c51f3ad2bb42c776f49ebf964c644958158be30d0a510efd5a395e8d49cb5acfed5b82c0c5b365523ce18e6ab85013c9ebe574f60305892ec3fa8eee8304ccc
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^3.5.3":
+  version: 3.5.3
+  resolution: "prettier@npm:3.5.3"
+  bin:
+    prettier: bin/prettier.cjs
+  checksum: 10c0/3880cb90b9dc0635819ab52ff571518c35bd7f15a6e80a2054c05dbc8a3aa6e74f135519e91197de63705bcb38388ded7e7230e2178432a1468005406238b877
   languageName: node
   linkType: hard
 
