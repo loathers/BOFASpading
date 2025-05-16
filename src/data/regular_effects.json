@@ -1,0 +1,41 @@
+[
+  "+Muscle substats",
+  "+Moxie substats",
+  "+Mysticality substats",
+  "Restore HP (10%)",
+  "Restore MP (10%)",
+  "+1 familiar experience",
+  "+25% item drop bonus",
+  "I Refuse!",
+  "Antiantifrozen (+3 hot resistance, 10 turns)",
+  "Shamed (+3 sleaze resistance, 10 turns)",
+  "Disabled Olfactory Processing (+3 stench resistance, 10 turns)",
+  "Imagining Guts (+3 cold resistance, 10 turns)",
+  "Spooked (+3 spooky resistance, 10 turns)",
+  "Ultrahydrated (5 turns)",
+  [
+    "worthless trinket",
+    "worthless gewgaw",
+    "worthless knick-knack"
+  ],
+  "some Meat@base Meat drop",
+  "pocket wish (cap 3/day)",
+  "fat stacks of cash",
+  [
+    "Sweet and Yellow (+30 ranged damage, +10 initiative, 10 turns) - every second time",
+    "Sweet and Green (+15 weapon damage, +15% weapon damage, 10 turns) - every second time",
+    "Sweet and Red (+10 spell damage, +10% spell damage, 10 turns) - every second time"
+  ],
+  [
+    "Gummiheart (+100 Muscle, 10 turns) - every 4th time",
+    "Gummibrain (+100 Mysticality, 10 turns) - every 4th time",
+    "Gummiskin (+100 Moxie, 10 turns) - every 4th time"
+  ],
+  [
+    "Ooh, Sweet! (+5 hot damage, 10 turns)",
+    "Ooh, Salty! (+5 cold damage, 10 turns)",
+    "Ooh, Bitter! (+5 spooky damage, 10 turns)",
+    "Ooh, Sour! (+5 stench damage, 10 turns)",
+    "Ooh, Umami! (+5 sleaze damage, 10 turns)"
+  ]
+]
