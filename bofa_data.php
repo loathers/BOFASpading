@@ -3915,6 +3915,8 @@ $classes = [
 	["Pig Skinner", "28"],
 	["Cheese Wizard", "29"],
 	["Jazz Agent", "30"],
+	["WereProfessor","31"],
+	["Zootomist","32"],
 ];
 
 $paths = [
@@ -3968,7 +3970,9 @@ $paths = [
 	["A Shrunken Adventurer Am I", "49"],
 	["WereProfessor", "50"],
 	["11 Things I Hate About U", "51"],
-	["Avant Guard", "52"]
+	["Avant Guard", "52"],
+	["Z for Zootomist", "53"],
+	["Hat Trick", "54"]
 ];
 
 $regular_effects = [
