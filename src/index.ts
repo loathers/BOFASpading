@@ -1,7 +1,8 @@
 import express, { Request, Response } from "express";
 import path from "path";
+import { fileURLToPath } from "url";
 
-import { getBofaKillEffect } from "./monsters";
+import { getBofaKillEffect, getMonsterZoneDescriptions } from "./monsters";
 import { load } from "./client";
 
 const app = express();
@@ -10,7 +11,7 @@ const port = process.env.PORT || 3000;
 // Set up EJS as the view engine
 app
   .set("view engine", "ejs")
-  .set("views", path.join(import.meta.dirname, "views"))
+  .set("views", path.join(fileURLToPath(import.meta.url), "../views"))
   .get("/", async (req: Request, res: Response) => {
     const { classes, monsters, paths } = await load();
 
@@ -22,12 +23,13 @@ app
     >((acc, monster) => {
       const effect = getBofaKillEffect(classId, pathId, monster);
       const [effectName, effectComment = ""] = effect.split("@");
+      const zones = getMonsterZoneDescriptions(monster);
 
       return {
         ...acc,
         [effectName]: [
           ...(acc[effectName] || []),
-          { monster: monster.name, comment: effectComment },
+          { monster: monster.name, comment: effectComment, zones },
         ],
       };
     }, {});

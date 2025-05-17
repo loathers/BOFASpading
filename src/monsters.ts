@@ -48,3 +48,50 @@ export function getBofaKillEffect(
 
   return effect;
 }
+
+export function getMonsterZoneDescriptions(monster: Monster) {
+  return monster.nativeMonstersByMonster.nodes.map((nativeMonster) =>
+    getMonsterZoneDescription(nativeMonster),
+  );
+}
+
+type NativeMonster = Monster["nativeMonstersByMonster"]["nodes"][number];
+
+function getMonsterZoneDescription(nativeMonster: NativeMonster) {
+  if (!nativeMonster) return "";
+
+  const location = nativeMonster.locationByLocation?.name ?? "Unknown location";
+
+  return `${location} (${getMonsterZoneDetails(nativeMonster)})`;
+}
+
+function getMonsterZoneDetails(nativeMonster: NonNullable<NativeMonster>) {
+  switch (nativeMonster.weight) {
+    case -1:
+      return "ultra-rare";
+    case 0:
+      return "special";
+    default: {
+      const details = [];
+      const location = nativeMonster.locationByLocation;
+      if (location) {
+        const rate =
+          location.combatRate >= 0 ? `${location.combatRate}%` : "unspaded";
+        details.push(`combat rate: ${rate}`);
+        const monsters = location.nativeMonstersByLocation.nodes.filter(
+          (m) => m && m.weight > 0,
+        ).length;
+        if (monsters > 1) details.push(`${monsters} monsters`);
+      }
+      if (nativeMonster.weight > 1)
+        details.push(`${nativeMonster.weight} copies`);
+      if (nativeMonster.rejection > 0)
+        details.push(`${nativeMonster.rejection}% rejection`);
+      if (nativeMonster.parity !== null)
+        details.push(
+          `${nativeMonster.parity % 2 === 0 ? "even" : "odd"} ascensions`,
+        );
+      return details.join(", ");
+    }
+  }
+}

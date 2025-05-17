@@ -103,6 +103,9 @@
                         <% if (res.comment) { %>
                             <br><span class="comment"><%= res.comment %></span>
                         <% } %>
+                        <% res.zones.map(info => { %>
+                            <br><span class="zone"><%= info %></span>
+                        <% }); %>
                     </p>
                 <% }); %>
             </div>

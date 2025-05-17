@@ -21,6 +21,22 @@ export async function load() {
         id: true,
         name: true,
         phylum: true,
+        nativeMonstersByMonster: {
+          nodes: {
+            weight: true,
+            rejection: true,
+            parity: true,
+            locationByLocation: {
+              combatRate: true,
+              name: true,
+              nativeMonstersByLocation: {
+                nodes: {
+                  weight: true,
+                },
+              },
+            },
+          },
+        },
       },
     },
   });

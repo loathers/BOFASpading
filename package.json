@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Book of Facts Spading Tool",
   "scripts": {
-    "start": "node --import tsx index.ts",
+    "start": "node --import tsx src/index.ts",
     "dev": "tsx watch src/index.ts",
     "format": "prettier --write ."
   },
