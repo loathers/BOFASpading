@@ -1,2 +1,23 @@
-# BOFASpading
-A Heroku-hosted website that can be used to isolate which items from the Book of Facts exist in a given seed combination.
+# Book of Facts Spading Tool
+
+A TypeScript-based web application for tracking Book of Facts effects in Kingdom of Loathing.
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+yarn
+```
+
+3. Start the server:
+
+```bash
+yarn start
+```
+
+For development with auto-reload:
+
+```bash
+yarn dev
+```

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Facts about Book of Facts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            font-size: 0.9em;
+        }
+        p, span {
+            margin: 0;
+            font-family: 'Open Sans', sans-serif;
+        }
+        p.monster span.comment {
+            font-size: 0.9em;
+            color: #222288;
+        }
+        p.monster span.zone {
+            font-size: 0.8em;
+            color: #444444;
+        }
+        .hidden .spoiler {
+            display: none;
+        }
+        .spoiler {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 1fr;
+            gap: 0.5em;
+            grid-gap: 0.5em;
+        }
+        .spoiler-inner {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-between;
+            background: linear-gradient(#E0FFE0, #FFFFFF, #E0FFE0);
+            font-size: 1.5em;
+            user-select: none;
+            cursor: pointer;
+        }
+        .hidden .spoiler-inner {
+            background: linear-gradient(#E0E0FF, #FFFFFF, #E0E0FF);
+        }
+        .spoiler-outer {
+            margin: 1em;
+        }
+        form {
+            display: flex;
+            align-items: center;
+        }
+        select {
+            margin-left: 1em;
+            margin-right: 2em;
+        }
+    </style>
+    <script>
+        function toggleSpoiler(spoiler_id) {
+            document.getElementById(spoiler_id).classList.toggle('hidden');
+        }
+        function openAllSpoilers() {
+            for (let element of document.getElementsByClassName('spoiler-outer')) {
+                element.classList.remove('hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+    <form action="/" method="get">
+        <label for="class">Class:</label>
+        <select name="class">
+            <% classes.forEach(function(class_) { %>
+                <option value="<%= class_.id %>" <%= selectedClass === class_.id ? 'selected' : '' %>><%= class_.name %></option>
+            <% }); %>
+        </select>
+
+        <label for="path">Path:</label>
+        <select name="path">
+            <% paths.forEach(function(path) { %>
+                <option value="<%= path.id %>" <%= selectedPath === path.id ? 'selected' : '' %>><%= path.name %></option>
+            <% }); %>
+        </select>
+
+        <button type="submit">Update</button>
+    </form>
+    <button onclick="openAllSpoilers()">Open all</button>
+
+    <% let blockId = 0; %>
+    <% Object.entries(results).forEach(function([result, resArr]) { %>
+        <% resArr.sort((a, b) => a.monster.localeCompare(b.monster)); %>
+        <div class="spoiler-outer hidden" id="<%= blockId %>">
+            <div class="spoiler-inner" onclick="toggleSpoiler('<%= blockId %>')">
+                <p><%= result %></p>
+                <p><%= resArr.length %></p>
+            </div>
+            <div class="spoiler">
+                <% resArr.forEach(function(res) { %>
+                    <p class="monster">
+                        <%= res.monster %>
+                        <% if (res.comment) { %>
+                            <br><span class="comment"><%= res.comment %></span>
+                        <% } %>
+                        <% res.zones.map(info => { %>
+                            <br><span class="zone"><%= info %></span>
+                        <% }); %>
+                    </p>
+                <% }); %>
+            </div>
+        </div>
+        <% blockId++; %>
+    <% }); %>
+
+    <footer>
+        <p style="text-align: right">Made by Semenar (#3275442)</p>
+    </footer>
+</body>
+</html> 
