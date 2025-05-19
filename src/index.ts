@@ -4,6 +4,9 @@ import { fileURLToPath } from "url";
 
 import { getBofaKillEffect, getMonsterZoneDescriptions } from "./monsters";
 import { load } from "./client";
+import memoize from "memoize";
+
+const memoizedLoad = memoize(load, { maxAge: 1000 * 60 * 15 });
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,7 +16,7 @@ app
   .set("view engine", "ejs")
   .set("views", path.join(fileURLToPath(import.meta.url), "../views"))
   .get("/", async (req: Request, res: Response) => {
-    const { classes, monsters, paths } = await load();
+    const { classes, monsters, paths } = await memoizedLoad();
 
     const classId = parseInt(req.query.class?.toString() || "1");
     const pathId = parseInt(req.query.path?.toString() || "0");
