@@ -50,17 +50,17 @@ export function getBofaKillEffect(
 }
 
 export function getMonsterZoneDescriptions(monster: Monster) {
-  return monster.nativeMonstersByMonster.nodes.map((nativeMonster) =>
+  return monster.nativeLocations.map((nativeMonster) =>
     getMonsterZoneDescription(nativeMonster),
   );
 }
 
-type NativeMonster = Monster["nativeMonstersByMonster"]["nodes"][number];
+type NativeMonster = Monster["nativeLocations"][number];
 
 function getMonsterZoneDescription(nativeMonster: NativeMonster) {
   if (!nativeMonster) return "";
 
-  const location = nativeMonster.locationByLocation?.name ?? "Unknown location";
+  const location = nativeMonster.location?.name ?? "Unknown location";
 
   return `${location} (${getMonsterZoneDetails(nativeMonster)})`;
 }
@@ -73,12 +73,12 @@ function getMonsterZoneDetails(nativeMonster: NonNullable<NativeMonster>) {
       return "special";
     default: {
       const details = [];
-      const location = nativeMonster.locationByLocation;
+      const location = nativeMonster.location;
       if (location) {
         const rate =
           location.combatRate >= 0 ? `${location.combatRate}%` : "unspaded";
         details.push(`combat rate: ${rate}`);
-        const monsters = location.nativeMonstersByLocation.nodes.filter(
+        const monsters = location.nativeMonsters.filter(
           (m) => m && m.weight > 0,
         ).length;
         if (monsters > 1) details.push(`${monsters} monsters`);

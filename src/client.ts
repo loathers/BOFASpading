@@ -1,55 +1,49 @@
-import { createClient } from "data-of-loathing";
+import {
+  createClient,
+  Monster as MonsterEntity,
+  AscensionClass,
+  Path as PathEntity,
+} from "data-of-loathing";
 
 const client = createClient();
 
 export async function load() {
-  const data = await client.query({
-    allClasses: {
-      nodes: {
-        id: true,
-        name: true,
-      },
-    },
-    allPaths: {
-      nodes: {
-        id: true,
-        name: true,
-      },
-    },
-    allMonsters: {
-      nodes: {
-        id: true,
-        name: true,
-        phylum: true,
-        nativeMonstersByMonster: {
-          nodes: {
-            weight: true,
-            rejection: true,
-            parity: true,
-            locationByLocation: {
-              combatRate: true,
-              name: true,
-              nativeMonstersByLocation: {
-                nodes: {
-                  weight: true,
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  });
+  await client.load();
+
+  const [classes, paths, monsters] = await Promise.all([
+    client.query.find(AscensionClass, {}),
+    client.query.find(PathEntity, {}),
+    client.query.find(MonsterEntity, {}, {
+      populate: [
+        "nativeLocations",
+        "nativeLocations.location",
+        "nativeLocations.location.nativeMonsters",
+      ] as const,
+    }),
+  ]);
 
   return {
-    classes: (data.allClasses?.nodes || []).filter((m) => m !== null),
-    paths: (data.allPaths?.nodes || []).filter((m) => m !== null),
-    monsters: (data.allMonsters?.nodes || [])
-      .filter((m) => m !== null)
-      .map((m) => ({
-        ...m,
-        phylum: m.phylum === "undefined" ? undefined : m.phylum,
+    classes: classes.map((c) => ({ id: c.id, name: c.name })),
+    paths: paths.map((p) => ({ id: p.id, name: p.name })),
+    monsters: monsters.map((m) => ({
+      id: m.id,
+      name: m.name,
+      phylum: m.phylum === "undefined" ? undefined : m.phylum,
+      nativeLocations: m.nativeLocations.getItems().map((nl) => ({
+        weight: nl.weight,
+        rejection: nl.rejection,
+        parity: nl.parity ?? null,
+        location: nl.location
+          ? {
+              combatRate: nl.location.combatRate,
+              name: nl.location.name,
+              nativeMonsters: nl.location.nativeMonsters
+                .getItems()
+                .map((nm) => ({ weight: nm.weight })),
+            }
+          : null,
       })),
+    })),
   };
 }
 
