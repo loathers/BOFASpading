@@ -6,7 +6,7 @@ import { getBofaKillEffect, getMonsterZoneDescriptions } from "./monsters";
 import { load } from "./client";
 import memoize from "memoize";
 
-const memoizedLoad = memoize(load, { maxAge: 1000 * 60 * 15 });
+const memoizedLoad = memoize(load, { maxAge: 1000 * 60 * 15 }) as typeof load & { cache: { clear(): void } };
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,10 +16,23 @@ app
   .set("view engine", "ejs")
   .set("views", path.join(fileURLToPath(import.meta.url), "../views"))
   .get("/", async (req: Request, res: Response) => {
-    const { classes, monsters, paths } = await memoizedLoad();
-
     const classId = parseInt(req.query.class?.toString() || "1");
     const pathId = parseInt(req.query.path?.toString() || "0");
+
+    let classes, monsters, paths;
+    try {
+      ({ classes, monsters, paths } = await memoizedLoad());
+    } catch {
+      memoizedLoad.cache.clear();
+      return res.render("index", {
+        classes: [],
+        paths: [],
+        results: {},
+        selectedClass: classId,
+        selectedPath: pathId,
+        unavailable: true,
+      });
+    }
 
     const results = monsters.reduce<
       Record<string, { monster: string; comment: string }[]>
@@ -37,7 +50,6 @@ app
       };
     }, {});
 
-    // Sort the results
     const sortedResults = Object.fromEntries(
       Object.entries(results).sort(([a], [b]) => a.localeCompare(b)),
     );
@@ -48,6 +60,7 @@ app
       results: sortedResults,
       selectedClass: classId,
       selectedPath: pathId,
+      unavailable: false,
     });
   })
   .listen(port, () => {

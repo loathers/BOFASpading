@@ -142,6 +142,12 @@ footer {
     </form>
     <button onclick="openAllSpoilers()">Open all</button>
 
+    <% if (unavailable) { %>
+    <p style="margin-top: 1em; padding: 0.8em 1em; background: #2e1f27; border-radius: 10px; color: #cf995f;">
+        data.loathers.net is currently unavailable. Data will load automatically when it comes back online — try refreshing shortly.
+    </p>
+    <% } %>
+
     <% let blockId = 0; %>
     <% Object.entries(results).forEach(function([result, resArr]) { %>
         <% resArr.sort((a, b) => a.monster.localeCompare(b.monster)); %>
