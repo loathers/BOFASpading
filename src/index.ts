@@ -4,9 +4,9 @@ import { fileURLToPath } from "url";
 
 import { getBofaKillEffect, getMonsterZoneDescriptions } from "./monsters";
 import { load } from "./client";
-import memoize from "memoize";
+import { memoizeWithExpiry } from "./memoize";
 
-const memoizedLoad = memoize(load, { maxAge: 1000 * 60 * 15 }) as typeof load & { cache: { clear(): void } };
+const memoizedLoad = memoizeWithExpiry(load, 1000 * 60 * 15);
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -23,7 +23,7 @@ app
     try {
       ({ classes, monsters, paths } = await memoizedLoad());
     } catch {
-      memoizedLoad.cache.clear();
+      memoizedLoad.clear();
       return res.render("index", {
         classes: [],
         paths: [],
